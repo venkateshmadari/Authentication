@@ -11,6 +11,6 @@ mongoose.connect(process.env.MONGO ).then(() => {
 })
 const app = express();
 app.listen(3000, () => {
-    console.log("the server is running successfully in 3000!");
+    console.log("the server is running successfully in 3000");
 });
 app.use('/api/user', userRoutes);
