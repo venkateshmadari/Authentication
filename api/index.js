@@ -6,7 +6,7 @@ import authRoutes from './routes/auth.route.js'
 dotenv.config();
 
 mongoose.connect(process.env.MONGO ).then(() => {
-    console.log("successfully connected to database.");
+    console.log("successfully connected to database.!");
 }).catch((err) => {
     console.log(err);
 })
@@ -17,3 +17,13 @@ app.listen(3000, () => {
 });
 app.use('/api/user', userRoutes);
 app.use('/api/auth', authRoutes);
+
+app.use((err, req, res, next) => {
+    const statusCode = err.statusCode || 500;
+    const message = err.message || 'Internal server error';
+    return res.status(statusCode).json({
+        success: false,
+        message,
+        statusCode,
+    });
+});
